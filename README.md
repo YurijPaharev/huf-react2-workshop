@@ -1,46 +1,78 @@
-# Getting Started with Create React App
+# Project API to solve the exercise
+RESTApi for the project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+``` json
+Authentication
+  POST /auth/login 
+  Body:
+  {
+    "email": "<user_email>",
+    "password": "<user_password>"
+  }
 
-## Available Scripts
+  POST /auth/sign-up
+  Body:
+  {
+    "email": "<new_user_email>",
+    "password": "<new_user_password>",
+    "phoneNumber": "<new_user_phone_number>",
+    "name": "<new_user_name>",
+    "familyName": "<new_user_family_name>"
+  }
 
-In the project directory, you can run:
+  POST /auth/verify-user
+  Body:
+  {
+    "email": "<user_email>",
+    "code": "<user_verification_code>"
+  }
 
-### `npm start`
+Projects API is restricted by the Bearer token, do not forget to use it when authorizing and when sending requests. (idToken of /auth/login call)
+Projects
+  GET /projects/get
+  Response:
+  [
+    {
+      "id": string,
+      "owner": string,
+      "title": string,
+      "description": string,
+      "size_used": string,
+      "shared": boolean,
+      "shared_password": string|null,
+      "created_at": string,
+      "updated_at": string,
+      "sharedUsers": Profile[],
+      "licenses": License[]
+    }
+  ]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  POST /projects/create
+  Body:
+  {
+    "title": string,
+    "description": string
+  }
+  Response:
+  {
+    "id": string,
+    "owner": string,
+    "title": string,
+    "description": string,
+    "size_used": string,
+    "shared": boolean,
+    "shared_password": string|null,
+    "created_at": string,
+    "updated_at": string,
+    "sharedUsers": Profile[],
+    "licenses": License[]
+  }
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# App parts
+The application should consist of several parts:
+1. Login page
+2. Registration page 
+3. Possibility to submit email code after user was registered
+4. Projects page with the list of currently created projects
+5. Modal to create a new project 
