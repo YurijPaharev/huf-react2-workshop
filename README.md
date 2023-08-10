@@ -10,12 +10,12 @@ Authentication
     "password": "<user_password>"
   }
 
-  POST /auth/sign-up
+  POST /auth/signup
   Body:
   {
     "email": "<new_user_email>",
-    "password": "<new_user_password>",
-    "phoneNumber": "<new_user_phone_number>",
+    "password": "<new_user_password>", // should contain letters, digits, symbols, capital letters. A minimum password length is 8 characters 
+    "phoneNumber": "<new_user_phone_number>", // should start from +45
     "name": "<new_user_name>",
     "familyName": "<new_user_family_name>"
   }
