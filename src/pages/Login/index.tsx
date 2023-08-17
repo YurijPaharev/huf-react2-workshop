@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import { TextField, Typography } from '@mui/material';
-import './Login.css'
+import './Login.css';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [email, setEmail] = useState<string>('');
@@ -23,16 +22,17 @@ function LoginPage() {
             email,
             password
           }
-        })
+        });
         if (response.status === 200 && response.statusText === 'OK') {
+          localStorage.setItem('tokens', JSON.stringify(response.data));
           console.log(response.data);
           navigate('/projects');
-        } 
-      } catch(e) {
+        }
+      } catch (e) {
         console.error(e);
       }
     }
-  }
+  };
 
   return (
     <div className="layout">
@@ -62,7 +62,7 @@ function LoginPage() {
           Submit
         </Button>
       </form>
-      <div className='link'>
+      <div className="link">
         <Link to={'/sign-up'}> Navigate to Sign up </Link>
       </div>
     </div>
