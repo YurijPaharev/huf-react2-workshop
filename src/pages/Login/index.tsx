@@ -24,7 +24,6 @@ function LoginPage() {
         });
         if (response.status === 200 && response.statusText === 'OK') {
           localStorage.setItem('tokens', JSON.stringify(response.data));
-          console.log(response.data);
           navigate('/projects');
         }
       } catch (e) {

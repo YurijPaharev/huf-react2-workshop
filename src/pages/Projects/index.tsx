@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ProjectItem from '../../components/ProjectItem';
 import './style.css';
+import AddProject from '../../components/AddProject';
 
 function ProjectsPage() {
   type Project = {
@@ -32,6 +33,7 @@ function ProjectsPage() {
   return (
     <>
       <h1>Your Projects</h1>
+      <AddProject />
       <ul>
         {projects.map((project) => (
           <ProjectItem

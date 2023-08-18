@@ -1,5 +1,5 @@
 import { Button, TextField, Typography } from '@mui/material';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ function SignUpPage() {
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res: AxiosResponse<any> = await axios({
+      const res = await axios({
         method: 'post',
         url: 'http://byrdbox-env.eba-4kxk4yka.eu-north-1.elasticbeanstalk.com/auth/signup',
         data: {
@@ -28,7 +28,6 @@ function SignUpPage() {
         }
       });
       if (res.status === 200) {
-        console.log(res.data);
         alert(
           'Signed up successfully. Verify your account using code sent to your email'
         );
@@ -112,7 +111,7 @@ function SignUpPage() {
           }
           required
         />
-        <Button variant="contained" onClick={submitForm}>
+        <Button variant="contained" type="submit">
           Sign Up!
         </Button>
       </form>
