@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { Button, Dialog, Typography, TextField } from '@mui/material';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AddProject = () => {
   const [open, setOpen] = useState<boolean>(false);
+  const [openPopup, setOpenPopup] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
+  const navigate = useNavigate();
 
   const submitForm = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +26,11 @@ const AddProject = () => {
       });
       if (res.status === 200) {
         setOpen(false);
+        setOpenPopup(true);
+        setTimeout(() => {
+          setOpenPopup(false);
+          navigate(0);
+        }, 1500);
       }
     } catch (e) {
       console.error(e);
@@ -67,6 +75,9 @@ const AddProject = () => {
             Submit
           </Button>
         </form>
+      </Dialog>
+      <Dialog open={openPopup} PaperProps={{ sx: { borderRadius: '8px' } }}>
+        <h2>Project Added!</h2>
       </Dialog>
     </>
   );

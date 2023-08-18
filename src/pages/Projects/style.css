@@ -1,17 +1,36 @@
 ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 0;
 }
 
 li {
   list-style: none;
   border: 1px solid gray;
+  border-radius: 5px;
   width: 20rem;
   padding: 0 1rem;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 p {
   word-wrap: break-word;
+}
+
+h2 {
+  padding: 2rem;
+}
+
+.logout {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  top: 7%;
+  left: 87%;
+  border-radius: 5px;
+}
+
+.logout:hover {
+  background-color: rgb(251, 248, 248);
 }

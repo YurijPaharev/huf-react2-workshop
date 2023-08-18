@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from '@mui/material';
+import { Button, TextField, Typography, Dialog } from '@mui/material';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ function SignUpPage() {
   const [familyName, setFamilyName] = useState<string>('');
   const [focusedPhone, setFocusedPhone] = useState<boolean>(false);
   const [focusedPass, setFocusedPass] = useState<boolean>(false);
+  const [openPopup, setOpenPopup] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const submitForm = async (e: React.FormEvent) => {
@@ -28,10 +29,11 @@ function SignUpPage() {
         }
       });
       if (res.status === 200) {
-        alert(
-          'Signed up successfully. Verify your account using code sent to your email'
-        );
-        navigate('/verify-user');
+        setOpenPopup(true);
+        setTimeout(() => {
+          setOpenPopup(false);
+          navigate('/verify-user');
+        }, 2000);
       }
     } catch (e: any) {
       console.error(e);
@@ -42,6 +44,7 @@ function SignUpPage() {
       }
     }
   };
+
   return (
     <div className="layout">
       <form onSubmit={(e) => submitForm(e)} className="form">
@@ -118,6 +121,12 @@ function SignUpPage() {
       <div className="link">
         Already have an account? <Link to={'/login'}>Login!</Link>
       </div>
+      <Dialog open={openPopup} PaperProps={{ sx: { borderRadius: '8px' } }}>
+        <h3>
+          Signed up successfully. Verify your account using code sent to your
+          email
+        </h3>
+      </Dialog>
     </div>
   );
 }

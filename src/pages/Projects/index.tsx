@@ -3,6 +3,8 @@ import axios from 'axios';
 import ProjectItem from '../../components/ProjectItem';
 import './style.css';
 import AddProject from '../../components/AddProject';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { useNavigate } from 'react-router-dom';
 
 function ProjectsPage() {
   type Project = {
@@ -12,18 +14,23 @@ function ProjectsPage() {
   };
 
   const [projects, setProjects] = useState<Project[]>([]);
+  const navigate = useNavigate();
+  const tokens = JSON.parse(localStorage.getItem('tokens') || '{}');
 
   const getProjects = async () => {
-    const tokens = JSON.parse(localStorage.getItem('tokens') || '{}');
     try {
       const res = await axios.get(
         'http://byrdbox-env.eba-4kxk4yka.eu-north-1.elasticbeanstalk.com/projects/get',
         { headers: { Authorization: `Bearer ${tokens.idToken}` } }
       );
-      setProjects(res.data);
-      console.log(res);
-    } catch (e) {
-      console.log(e);
+      if (res.status === 200) {
+        setProjects(res.data);
+      }
+    } catch (e: any) {
+      if (e.response.status === 401) {
+        navigate('/login');
+      }
+      console.error(e);
     }
   };
   useEffect(() => {
@@ -32,6 +39,14 @@ function ProjectsPage() {
 
   return (
     <>
+      <button type="button" className="logout">
+        <LogoutIcon
+          onClick={() => {
+            localStorage.clear();
+            navigate('/login');
+          }}
+        />
+      </button>
       <h1>Your Projects</h1>
       <AddProject />
       <ul>
