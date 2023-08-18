@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import { TextField, Typography } from '@mui/material';
-import './Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -57,6 +56,7 @@ function LoginPage() {
           id="password"
           label="Password"
           variant="outlined"
+          type="password"
         />
         <Button variant="contained" onClick={submitForm}>
           Submit

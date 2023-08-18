@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/Login';
 import SignUpPage from './pages/Signup';
 import ProjectsPage from './pages/Projects';
 import ErrorPage from './pages/Error';
+import VerifyUser from './pages/VerifyUser';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +28,8 @@ const router = createBrowserRouter([
     path: '/projects',
     element: <ProjectsPage />
   },
+  { path: '/verify-user', element: <VerifyUser /> }
 ]);
-
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
